@@ -8,4 +8,6 @@
 
 
 # 开始爬取的url
-# http://www.biquge.com.tw/1_1111/
+# http://www.biquge.com.tw/1_1001/
+# 最后一篇文章
+# http://www.biquge.com.tw/19_19767/
