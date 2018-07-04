@@ -2,7 +2,7 @@ import chardet
 import requests
 
 
-#获取一级页面的网页URL
+# 获取URL的网页HTML
 def get_bigone_html(url):
     res = requests.get(url)
     html_bytes = res.content
