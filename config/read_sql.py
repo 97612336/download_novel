@@ -1,7 +1,11 @@
 import json
 import os
 
-#获取MySQL的配置文件
+
+# 获取MySQL的配置文件
+import pymysql
+
+
 def get_mysql_conf():
     user_home = os.environ.get("HOME")
     conf_base_path = user_home + "/conf"
@@ -11,3 +15,13 @@ def get_mysql_conf():
     mysql_dict = json.loads(res_str)
     return mysql_dict
 
+
+# 链接数据库,返回db对象
+def get_mysql_db():
+    # 获取配置文件
+    mysql_dict = get_mysql_conf()
+    #链接数据库
+    connection=pymysql.connect(host=mysql_dict.get("host"),user=mysql_dict.get("user"),
+                                password=mysql_dict.get("password"),port=mysql_dict.get("port"),
+                                db=mysql_dict.get("db"))
+    return connection
