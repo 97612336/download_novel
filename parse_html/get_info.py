@@ -8,6 +8,8 @@ def get_info_and_chapter_url(one_book_url):
     book_info = {}
     # 得到URL的HTML文件
     book_html_text = get_html_text(one_book_url)
+    # 得到书本的url
+    book_info['url'] = one_book_url
     # 得到书的标题
     title_res = html_parser(book_html_text, '//*[@id="info"]/h1/text()')
     if len(title_res):
