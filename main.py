@@ -15,17 +15,7 @@ for one in big_one_url_list:
     book_info = get_info_and_chapter_url(one)
     # 执行存入数据库的操作
     save_book_info(book_info)
-
     end_time = time.time()
-
-
-
-
-
-
-
-
-
     cost_time = end_time - start_time
     print("本次执行共花费了%s秒" % cost_time)
 
