@@ -17,6 +17,29 @@ def get_info_and_chapter_url(one_book_url):
         book_info["name"] = title
     else:
         return
+    # 得到书的分类
+    book_kind_list = html_parser(book_html_text,
+                                 '//*[@id="wrapper"]/div[@class="box_con"]/div[@class="con_top"]/text()')
+    if len(book_kind_list) > 2:
+        book_kind = str(book_kind_list[2]).split('>')[1].replace(" ", '')
+        book_info["kind"] = book_kind
+    else:
+        book_info['kind'] = ''
+    # 得到书本的封面图
+    book_img_list = html_parser(book_html_text, '//*[@id="fmimg"]/img/@src')
+    if len(book_img_list):
+        book_half_img = book_img_list[0]
+        book_img = r"http://www.biquge.com.tw" + book_half_img
+        book_info["img"] = book_img
+    else:
+        book_info['img'] = ''
+    # 得到书本的作者信息
+    book_author_list = html_parser(book_html_text, '//*[@id="info"]/p[1]/text()')
+    if len(book_author_list):
+        book_author_str = str(book_author_list[0]).split("：")[1]
+        book_info['author'] = book_author_str
+    else:
+        book_info['author'] = ''
     # 得到文章章节链接和章节名
     chapter_list = []
     chapter_nodes = html_parser(book_html_text, '//*[@id="list"]/dl/dd/a')
