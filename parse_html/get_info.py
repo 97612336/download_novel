@@ -2,6 +2,13 @@ from get_html.get_html_text import get_html_text
 from lxml import etree
 
 
+def html_parser(html_text, compl_str):
+    # 解析HTML文件
+    tree = etree.HTML(html_text)
+    res = tree.xpath(compl_str)
+    return res
+
+
 # 获取书本的说明信息和各个章节的URL
 def get_info_and_chapter_url(one_book_url):
     # 本书目录信息
@@ -61,8 +68,16 @@ def get_info_and_chapter_url(one_book_url):
     return book_info
 
 
-def html_parser(html_text, compl_str):
-    # 解析HTML文件
-    tree = etree.HTML(html_text)
-    res = tree.xpath(compl_str)
-    return res
+# 根据一个章节url,获取格式化的章节信息
+def get_chapter_text_by_url(url):
+    # 根据url获取html内容
+    chapter_text = get_html_text(url)
+    # 获取章节正文内容
+    res = html_parser(chapter_text,
+                      "/html/body/div[@id='wrapper']/div[@class='content_read']"
+                      "/div[@class='box_con']/div[@id='content']/text()")
+    if not res:
+        return 0
+    chapter_text = str(res).replace(r"\r\n\xa0\xa0\xa0\xa0", "&nbsp;&nbsp;").replace(
+        r"\xa0\xa0\xa0\xa0", "&nbsp;&nbsp;").replace(r"\r\n", "<br>").replace("'",'"')
+    return chapter_text

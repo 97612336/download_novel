@@ -30,3 +30,18 @@ def save_book_info(one_book_dict):
     except:
         db.rollback()
         print("回滚一次")
+    cursor.close()
+    db.close()
+
+
+# 根据书名获取数据库中的id
+def get_book_id_by_name(book_name):
+    db = get_mysql_db()
+    cursor = db.cursor()
+
+    sql = 'SELECT id FROM book WHERE name="%s";' % book_name
+
+    cursor.execute(sql)
+
+    res = cursor.fetchone()
+    print(res)
