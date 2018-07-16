@@ -44,4 +44,27 @@ def get_book_id_by_name(book_name):
     cursor.execute(sql)
 
     res = cursor.fetchone()
-    print(res)
+
+    cursor.close()
+    db.close()
+
+    if res:
+        return res[0]
+    else:
+        return 0
+
+
+# 根据book_id,查询数据库并更改has_chapter的值设为0
+def set_book_has_chapter_by_id(book_id):
+    db = get_mysql_db()
+    cursor = db.cursor()
+    sql = r'update book set has_chapter=0  where id=%s;' % book_id
+    try:
+        cursor.execute(sql)
+        db.commit()
+        print("成功设置has_chapter值")
+    except:
+        db.rollback()
+
+    cursor.close()
+    db.close()

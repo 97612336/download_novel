@@ -78,6 +78,6 @@ def get_chapter_text_by_url(url):
                       "/div[@class='box_con']/div[@id='content']/text()")
     if not res:
         return 0
-    chapter_text = str(res).replace(r"\r\n\xa0\xa0\xa0\xa0", "&nbsp;&nbsp;").replace(
-        r"\xa0\xa0\xa0\xa0", "&nbsp;&nbsp;").replace(r"\r\n", "<br>").replace("'",'"')
+    chapter_text = str(res).replace(r"\r\n\xa0\xa0\xa0\xa0", "").replace(
+        r"\xa0\xa0\xa0\xa0", "").replace(r"\r\n", "").replace("'",'"')
     return chapter_text
