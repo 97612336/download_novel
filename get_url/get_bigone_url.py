@@ -1,8 +1,9 @@
 # 获取一级页面的url
+import json
 import time
 
 from parse_html.get_info import get_chapter_text_by_url
-from save_to_db.save_book import get_book_id_by_name, set_book_has_chapter_by_id
+from save_to_db.save_book import get_book_id_by_name, set_book_has_chapter_by_id, save_chapter
 
 
 def get_level_one_url():
@@ -52,8 +53,9 @@ def get_chapter_by_book_info(book_info):
             set_book_has_chapter_by_id(book_id)
             break
         one_chapter['data'] = res
-        print(res)
         # 对章节执行保存到数据库的操作
-
+        one_chapter["book_id"] = book_id
+        # 保存章节信息到章节表
+        save_chapter(one_chapter)
         # 延时一秒操作
         time.sleep(1)

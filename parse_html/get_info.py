@@ -1,3 +1,5 @@
+import json
+
 from get_html.get_html_text import get_html_text
 from lxml import etree
 
@@ -79,5 +81,8 @@ def get_chapter_text_by_url(url):
     if not res:
         return 0
     chapter_text = str(res).replace(r"\r\n\xa0\xa0\xa0\xa0", "").replace(
-        r"\xa0\xa0\xa0\xa0", "").replace(r',"\r\n"', "").replace("'",'"')
+        r"\xa0\xa0\xa0\xa0", "").replace(r'\r\n', "").replace("'", '"').replace(r'"",', '')
+
+    # print(chapter_text)
+
     return chapter_text

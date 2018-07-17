@@ -68,3 +68,26 @@ def set_book_has_chapter_by_id(book_id):
 
     cursor.close()
     db.close()
+
+
+# 根据one_chapter字典保存信息到chapter表中
+def save_chapter(one_chapter):
+    # 获取传值
+    book_id = one_chapter.get("book_id")
+    name = one_chapter.get("name")
+    chapter_url = one_chapter.get("href")
+    chapter_text = one_chapter.get('data')
+    # 获取db
+    db = get_mysql_db()
+    cursor = db.cursor()
+    sql = r"INSERT INTO chapter (book_id,name,chapter_url,chapter_text) VALUES(%s,'%s','%s','%s');" \
+          % (book_id, name, chapter_url, chapter_text)
+    try:
+        cursor.execute(sql)
+        db.commit()
+        print("成功存储一个章节的内容")
+    except:
+        db.rollback()
+
+    cursor.close()
+    db.close()
