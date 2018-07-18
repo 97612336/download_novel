@@ -20,8 +20,14 @@ for one in big_one_url_list:
         print(e)
         time.sleep(1)
         continue
+    # 如果没有获取到书本信息,则直接退出本次循环
+    if not book_info:
+        continue
     # 执行存入数据库的操作
-    save_book_info(book_info)
+    is_success = save_book_info(book_info)
+    # 如果保存书名的时候出错,直接退出本次循环
+    if not is_success:
+        continue
     # 根据book_info,得到所有章节,然后存入到数据库中
     get_chapter_by_book_info(book_info)
 

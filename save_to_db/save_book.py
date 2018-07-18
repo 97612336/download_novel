@@ -26,10 +26,13 @@ def save_book_info(one_book_dict):
     try:
         cursor.execute(sql)
         db.commit()
-        print("成功保存一本书")
+        print("成功保存一本书名")
     except:
         db.rollback()
         print("回滚一次")
+        cursor.close()
+        db.close()
+        return 0
     cursor.close()
     db.close()
 
