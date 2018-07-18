@@ -27,14 +27,16 @@ def save_book_info(one_book_dict):
         cursor.execute(sql)
         db.commit()
         print("成功保存一本书名")
+        cursor.close()
+        db.close()
+        return 1
     except:
         db.rollback()
         print("回滚一次")
         cursor.close()
         db.close()
         return 0
-    cursor.close()
-    db.close()
+
 
 
 # 根据书名获取数据库中的id

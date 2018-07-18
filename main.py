@@ -37,8 +37,3 @@ for one in big_one_url_list:
     print("本次执行共花费了%s秒" % cost_time)
 
 
-
-# 开始爬取的url
-# http://www.biquge.com.tw/1_1001/
-# 最后一篇文章
-# http://www.biquge.com.tw/19_19767/
