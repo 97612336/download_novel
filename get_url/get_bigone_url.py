@@ -8,16 +8,22 @@ from save_to_db.save_book import get_book_id_by_name, set_book_has_chapter_by_id
 
 def get_level_one_url():
     bigone_url_list = []
-    for i in range(1, 20):
-        half_url = r'http://www.biquge.com.tw/%s_%s' % (i, i)
-        for j in range(1, 1000):
-            if i == 19:
-                if j < 768:
+    for i in range(0, 20):
+        if i == 0:
+            half_url = r'http://www.biquge.com.tw/%s_' % (i)
+            for j in range(1, 1000):
+                url = half_url + str(j)
+                bigone_url_list.append(url)
+        else:
+            half_url = r'http://www.biquge.com.tw/%s_%s' % (i, i)
+            for j in range(1, 1000):
+                if i == 19:
+                    if j < 768:
+                        url = splicing_bigone_url(half_url, j)
+                        bigone_url_list.append(url)
+                else:
                     url = splicing_bigone_url(half_url, j)
                     bigone_url_list.append(url)
-            else:
-                url = splicing_bigone_url(half_url, j)
-                bigone_url_list.append(url)
     return bigone_url_list
 
 
