@@ -1,3 +1,5 @@
+import datetime
+
 import chardet
 import requests
 
@@ -14,8 +16,13 @@ def get_html_text(url):
         "Host": "http://www.biquge.com.tw",
         "Referer": "http://www.biquge.com.tw"
     }
-    res = requests.get(url)
+    res = requests.get(url, headers=headers)
     html_bytes = res.content
     code_style = chardet.detect(html_bytes).get("encoding")
-    html_text = html_bytes.decode(code_style, "ignore")
+    try:
+        html_text = html_bytes.decode(code_style, "ignore")
+    except:
+        print(datetime.datetime.now())
+        print("编码解析错误,返回空字符串")
+        return ''
     return html_text

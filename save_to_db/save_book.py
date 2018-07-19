@@ -1,3 +1,5 @@
+import datetime
+
 from config.read_sql import get_mysql_db
 
 
@@ -26,12 +28,14 @@ def save_book_info(one_book_dict):
     try:
         cursor.execute(sql)
         db.commit()
+        print(datetime.datetime.now())
         print("成功保存一本书名")
         cursor.close()
         db.close()
         return 1
     except:
         db.rollback()
+        print(datetime.datetime.now())
         print("回滚一次")
         cursor.close()
         db.close()
@@ -67,6 +71,7 @@ def set_book_has_chapter_by_id(book_id):
     try:
         cursor.execute(sql)
         db.commit()
+        print(datetime.datetime.now())
         print("成功设置has_chapter值")
     except:
         db.rollback()
@@ -90,6 +95,7 @@ def save_chapter(one_chapter):
     try:
         cursor.execute(sql)
         db.commit()
+        print(datetime.datetime.now())
         print("成功存储一个章节的内容")
     except:
         db.rollback()
