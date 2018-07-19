@@ -16,6 +16,6 @@ def get_html_text(url):
         html_text = html_bytes.decode(code_style, "ignore")
     except:
         print(datetime.datetime.now())
-        print("编码解析错误,返回空字符串")
+        print("encoding is error")
         return ''
     return html_text

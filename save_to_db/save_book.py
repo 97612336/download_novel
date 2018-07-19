@@ -29,14 +29,14 @@ def save_book_info(one_book_dict):
         cursor.execute(sql)
         db.commit()
         print(datetime.datetime.now())
-        print("成功保存一本书名")
+        print("success save book")
         cursor.close()
         db.close()
         return 1
     except:
         db.rollback()
         print(datetime.datetime.now())
-        print("回滚一次")
+        print("rollback once")
         cursor.close()
         db.close()
         return 0
@@ -72,7 +72,7 @@ def set_book_has_chapter_by_id(book_id):
         cursor.execute(sql)
         db.commit()
         print(datetime.datetime.now())
-        print("成功设置has_chapter值")
+        print("set has_chapter value success")
     except:
         db.rollback()
 
@@ -96,7 +96,7 @@ def save_chapter(one_chapter):
         cursor.execute(sql)
         db.commit()
         print(datetime.datetime.now())
-        print("成功存储一个章节的内容")
+        print("success save one chapter")
     except:
         db.rollback()
 
