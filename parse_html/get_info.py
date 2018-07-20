@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from get_html.get_html_text import get_html_text
@@ -6,8 +7,13 @@ from lxml import etree
 
 def html_parser(html_text, compl_str):
     # 解析HTML文件
-    tree = etree.HTML(html_text)
-    res = tree.xpath(compl_str)
+    try:
+        tree = etree.HTML(html_text)
+        res = tree.xpath(compl_str)
+    except:
+        print(datetime.datetime.now())
+        print("can't parse html")
+        return
     return res
 
 
