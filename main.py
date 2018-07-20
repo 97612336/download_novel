@@ -18,6 +18,8 @@ for one in big_one_url_list:
         book_info = get_info_and_chapter_url(one)
         time.sleep(1)
     except Exception as e:
+        print(datetime.datetime.now())
+        print("save book info fail")
         print(e)
         time.sleep(1)
         continue
@@ -34,12 +36,18 @@ for one in big_one_url_list:
         print("save book faile ,exit this one")
         continue
     # 根据book_info,得到所有章节,然后存入到数据库中
-    get_chapter_by_book_info(book_info)
+    try:
+        get_chapter_by_book_info(book_info)
+        time.sleep(1)
+    except Exception as e:
+        print(datetime.datetime.now())
+        print("save chapter info fail")
+        print(e)
+        time.sleep(1)
+        continue
 
     # 记录结束时间
     end_time = time.time()
     cost_time = end_time - start_time
     print(datetime.datetime.now())
     print("cost time is :%s" % cost_time)
-
-
